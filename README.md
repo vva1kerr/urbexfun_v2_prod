@@ -11,7 +11,7 @@
 * `sudo apt-get install -y gdal-bin libgdal-dev`
 * `sudo apt-get install gmt gmt-dcw gmt-gshhg`
 * `cd "Your-repository"`
-* `apt install python<version>-venv` # if on Debian/Ubuntu
+* `sudo apt install python<version>-venv` # if on Debian/Ubuntu
 * `python -m venv venv`
 * `source venv/bin/activate`
 * `pip3 install -r requirements.txt`
