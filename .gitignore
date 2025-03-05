@@ -1,0 +1,19 @@
+.env
+venv/
+docs/
+
+01_Map.py
+02_Graph copy 2.py 
+02_Graph copy.py 
+03_Satellite.py 
+04_PDF_Viewer.py 
+05_Select_Examples.py 
+06_testing.py 
+
+scripts/
+test_pages/ 
+
+src/database/get_database_schema.py
+src/get_coords/
+src/topography/location_data
+
