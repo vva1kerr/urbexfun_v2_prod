@@ -81,3 +81,6 @@ Restart your nginx server
 pages/ - Contains all Streamlit UI pages (your frontend)
 src/ - Contains reusable Python modules/classes (your backend logic)
 scripts/ - Contains standalone utility scripts (one-off tools)
+
+# HELPFUL WSL
+* `explorer.exe .`
