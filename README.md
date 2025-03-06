@@ -9,6 +9,7 @@
 * `sudo apt install python-is-python3`
 * `sudo apt install -y libgl1 mesa-utils xvfb`
 * `sudo apt-get install -y gdal-bin libgdal-dev`
+* `apt-get update && apt-get install ffmpeg libsm6 libxext6  -y`
 * `sudo apt-get install gmt gmt-dcw gmt-gshhg`
 * `cd "Your-repository"`
 * `sudo apt install python<version>-venv` # if on Debian/Ubuntu
