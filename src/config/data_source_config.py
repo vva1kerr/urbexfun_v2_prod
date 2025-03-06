@@ -39,14 +39,26 @@ def get_local_source():
 
 def get_mounted_s3_source():
     """Get mounted S3 bucket data source."""
-    # Ensure we're using the correct mount point path
-    mount_point = Path(DEFAULT_MOUNT_POINT).expanduser()
-    print(f"Expanded mount point path: {mount_point}")  # Debug print
-    if not mount_point.exists():
-        raise ValueError(f"Mount point {mount_point} does not exist. Please check your .env file and ensure the path is correct.")
+    # Get the mount point from .env and clean it
+    mount_point = DEFAULT_MOUNT_POINT.strip("'").strip('"').rstrip('/')
+    print(f"Mount point from .env: {mount_point}")  # Debug print
+    
+    # Handle path expansion based on user
+    if os.geteuid() == 0:  # Running as root
+        # Replace ~ with /home/ubuntu when running as root
+        mount_point = mount_point.replace('~', '/home/ubuntu')
+        print(f"Running as root, expanded path: {mount_point}")  # Debug print
+    else:
+        # Normal case - expand user path
+        mount_point = str(Path(mount_point).expanduser())
+        print(f"Normal case, expanded path: {mount_point}")  # Debug print
+    
+    mount_point_path = Path(mount_point)
+    if not mount_point_path.exists():
+        raise ValueError(f"Mount point {mount_point_path} does not exist. Please check your .env file and ensure the path is correct.")
     return DataSourceFactory.create(
         source_type=DataSourceType.MOUNTED_S3,
-        mount_point=str(mount_point)
+        mount_point=str(mount_point_path)
     )
 
 def get_boto3_s3_source():
