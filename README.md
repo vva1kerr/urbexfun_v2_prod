@@ -79,6 +79,65 @@ Restart your nginx server
 
 
 pages/ - Contains all Streamlit UI pages (your frontend)
+
+
+# PYTHON ENVIRONMENT
+* (open command line)
+* cd ~/Desktop
+* mkdir my_streamlit_app
+* cd my_streamlit_app
+* code .
+* (open command line)
+* python -m venv myenv
+* pip install -r requirements.txt
+* streamlit run app.py
+
+# CONFIGURE GIT
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+
+# PUSH CODE TO GITHUB
+* git init
+* git add .
+* git commit -m "Initial commit"
+* git branch -M main
+* git remote add origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+* git push -u origin main
+
+# ADD SSH TO LOCAL AND GITHUB (WINDOWS)
+* ssh-keygen -t ed25519 -C "your_email@example.com" 
+* cat ~/.ssh/id_ed25519.pub  # This displays the key in terminal
+* type %userprofile%\.ssh\id_ed25519.pub  # Alternative Windows command
+* clip < ~/.ssh/id_ed25519.pub  # This copies the key to clipboard
+* ssh -T git@github.com  # Test the connection
+
+
+# If you want to remove the file from Git but keep it locally
+git rm --cached sensitive_file.txt
+To remove the file from the Git history (very important for sensitive data), you can use git filter-branch
+git push origin --force
+
+# Streamlit secrets
+* streamlit secrets write secrets.toml
+* streamlit run app.py
+
+# Streamlit config
+* streamlit config show
+
+### when to use .streamlit/secrets.toml
+# API Keys
+openai_api_key = "sk-..."
+aws_access_key = "AKIA..."
+
+# Database credentials
+db_username = "myuser"
+db_password = "mypassword"
+
+# Other configuration
+app_mode = "production"
+debug = false
+
 src/ - Contains reusable Python modules/classes (your backend logic)
 scripts/ - Contains standalone utility scripts (one-off tools)
 
