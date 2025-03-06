@@ -9,7 +9,7 @@
 * `sudo apt install python-is-python3`
 * `sudo apt install -y libgl1 mesa-utils xvfb`
 * `sudo apt-get install -y gdal-bin libgdal-dev`
-* `sudo apt-get update && apt-get install ffmpeg libsm6 libxext6  -y` <!-- https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-file-no-such-file-or-directo) -->
+* `sudo apt-get update && sudo apt-get install ffmpeg libsm6 libxext6 -y` <!-- https://stackoverflow.com/questions/55313610/importerror-libgl-so-1-cannot-open-shared-object-file-no-such-file-or-directo) -->
 * `sudo apt-get install gmt gmt-dcw gmt-gshhg`
 * `cd "Your-repository"`
 * `sudo apt install python<version>-venv` # if on Debian/Ubuntu
