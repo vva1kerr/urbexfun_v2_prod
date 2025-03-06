@@ -106,7 +106,9 @@ git config --global user.name "Your Name"
 * git push -u origin main
 
 # ADD SSH TO LOCAL AND GITHUB (WINDOWS)
-* ssh-keygen -t ed25519 -C "your_email@example.com" 
+* ssh-keygen -t ed25519 -C "your_email@example.com"
+* eval "$(ssh-agent -s)"
+* ssh-add ~/.ssh/id_ed25519
 * cat ~/.ssh/id_ed25519.pub  # This displays the key in terminal
 * type %userprofile%\.ssh\id_ed25519.pub  # Alternative Windows command
 * clip < ~/.ssh/id_ed25519.pub  # This copies the key to clipboard
