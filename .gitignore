@@ -1,3 +1,5 @@
+
+
 .env
 venv/
 docs/
@@ -16,3 +18,5 @@ test_pages/
 src/database/get_database_schema.py
 src/topography/location_data
 
+__pycache__/
+*.pyc

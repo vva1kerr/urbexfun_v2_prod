@@ -42,18 +42,6 @@ class DataSourceFactory:
         Returns:
             Configured data source instance
         """
-        # Load environment variables if not provided
-        if not aws_access_key_id:
-            aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
-        if not aws_secret_access_key:
-            aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
-        if not region_name:
-            region_name = os.getenv('AWS_REGION_NAME')
-        if not bucket_name:
-            bucket_name = os.getenv('AWS_BUCKET_NAME')
-        if not mount_point:
-            mount_point = os.getenv('MOUNT_POINT')
-        
         if source_type == DataSourceType.LOCAL:
             if not base_path:
                 raise ValueError("base_path is required for LOCAL source type")

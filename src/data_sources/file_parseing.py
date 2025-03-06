@@ -12,9 +12,6 @@ from shapely.geometry import box
 import numpy as np
 from src.config.data_source_config import get_data_source
 
-data_source = get_data_source()
-print('data_source',data_source)
-
 @dataclass
 class Bounds:
     """Class to hold boundary coordinates"""
@@ -81,7 +78,7 @@ def get_required_file_names(bounds: Bounds) -> list[str]:
     # Generate all possible combinations of files needed
     for x in range(x_min, x_max + 1):
         for y in range(y_min, y_max + 1):
-            # Format: xmin-94_xmax-93_ymin68_ymax69.tif
+            # Format: xmin-86_xmax-85_ymin34_ymax35.tif
             filename = f"xmin{x}_xmax{x+1}_ymin{y}_ymax{y+1}.tif"
             required_files.append(filename)
     
@@ -208,28 +205,31 @@ def combine_tiff_files(input_dir: str, output_path: str, lat: float, lon: float,
     Returns:
         bool: True if successful, False otherwise
     """
-    # print(f"Latitude: {lat}")
-    # print(f"Longitude: {lon}")
-    # print(f"Elevation: {elevation}")
     try:
         # Calculate bounds and get required file names
         bounds = calculate_zoom_bounds(lat, lon, elevation)
-        # print(f"Bounds: {bounds}")
+        print(f"Calculated bounds: {bounds}")
         required_files = get_required_file_names(bounds)
-        # print(f"Required files: {required_files}")
+        print(f"Required files: {required_files}")
         
-        # Convert input directory to Path object
+        # Convert input directory to Path object and expand user path
         input_path = Path(input_dir)
+        print(f"Input directory (before expansion): {input_dir}")
+        print(f"Input directory (after Path conversion): {input_path}")
+        print(f"Input directory exists: {input_path.exists()}")
         
         # Find all matching files in the input directory
         tiff_files = []
         for file in required_files:
-            # Search for the file in the input directory and its subdirectories
-            matches = list(input_path.rglob(file))
-            if matches:
-                tiff_files.append(str(matches[0]))
+            # Search for the file in the input directory
+            file_path = input_path / file
+            if file_path.exists():
+                tiff_files.append(str(file_path))
+                print(f"Found file: {file_path}")
             else:
                 print(f"Warning: Could not find file {file}")
+                # List contents of directory to help debug
+                print(f"Directory contents: {list(input_path.glob('*.tif'))}")
         
         if not tiff_files:
             print("Error: No matching TIFF files found")

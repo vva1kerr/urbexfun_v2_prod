@@ -50,7 +50,7 @@ from src.topography.graph_types.ridge_plots import create_ridge_plot_optimized, 
 from src.topography.graph_types.dem_plots import create_dem_plot, create_adjusted_dem_plot
 from src.map_utils.map_operations import create_map, get_map_parameters
 from src.weather.get_weather import get_weather_data
-from src.config.data_source_config import get_data_source
+from src.config.data_source_config import get_data_source, get_base_path
 from src.data_sources.file_parseing import combine_tiff_files, calculate_zoom_bounds
 from src.database.db_utils import (
     get_all_states, 
@@ -140,7 +140,9 @@ st.title("Topography Viewer")
 
 
 # Initialize data source
-data_source = get_data_source()
+print("Initializing data source...")  # Debug print
+data_source = get_data_source('mounted_s3')  # Explicitly use mounted_s3 source
+print(f"Data source type: {type(data_source).__name__}")  # Debug print
 # Initialize location_data and combined_tiff_path
 location_data = None
 combined_tiff_path = None
@@ -376,8 +378,9 @@ if selected_graphs and st.session_state.current_tiff_path and st.session_state.l
     if st.session_state.needs_processing:
         try:
             # Combine TIFF files using session state data
+            input_dir = get_base_path(data_source)
             success = combine_tiff_files(
-                input_dir=data_source.base_path,
+                input_dir=input_dir,
                 output_path=st.session_state.current_tiff_path,
                 lat=st.session_state.location_data['center_point']['lat'],
                 lon=st.session_state.location_data['center_point']['lon'],

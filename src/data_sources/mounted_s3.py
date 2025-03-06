@@ -12,7 +12,9 @@ class MountedS3DataSource(BaseDataSource):
         Args:
             mount_point: Path where the S3 bucket is mounted
         """
-        self.mount_point = Path(mount_point)
+        # Expand user path and convert to Path object
+        self.mount_point = Path(mount_point).expanduser()
+        print(f"MountedS3DataSource initialized with mount point: {self.mount_point}")  # Debug print
     
     def get_file_path(self, file_path: Union[str, Path]) -> Path:
         return self.mount_point / file_path
