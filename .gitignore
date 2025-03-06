@@ -14,6 +14,5 @@ scripts/
 test_pages/ 
 
 src/database/get_database_schema.py
-src/get_coords/
 src/topography/location_data
 
