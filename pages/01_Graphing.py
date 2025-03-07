@@ -139,6 +139,33 @@ st.title("Topography Viewer")
 
 
 
+
+# Create three equal-width columns
+col1, col2, col3 = st.columns(3)
+# Load and resize images to be the same size
+target_width = 400  # You can adjust this value
+target_height = 300  # Set a fixed height for all images
+# Function to resize image to fixed dimensions
+def load_and_resize(image_path, width, height):
+    img = Image.open(image_path)
+    return img.resize((width, height))
+# Display images with use_container_width=True to make them fill their columns
+with col1:
+    img1 = load_and_resize('images/left.png', target_width, target_height)
+    st.image(img1, use_container_width=True)
+with col2:
+    img2 = load_and_resize('images/right.png', target_width, target_height)
+    st.image(img2, use_container_width=True)
+with col3:
+    img3 = load_and_resize('images/bottom.png', target_width, target_height)
+    st.image(img3, use_container_width=True)
+
+
+
+
+
+
+
 # Initialize data source
 print("Initializing data source...")  # Debug print
 data_source = get_data_source('mounted_s3')  # Explicitly use mounted_s3 source
